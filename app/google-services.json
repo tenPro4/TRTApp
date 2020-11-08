@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "189332403887",
+    "firebase_url": "https://trtapp-fe3d7.firebaseio.com",
+    "project_id": "trtapp-fe3d7",
+    "storage_bucket": "trtapp-fe3d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189332403887:android:c3ff1467587ac37ca6465a",
+        "android_client_info": {
+          "package_name": "com.example.trtapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189332403887-re0gn4rcdk1sbt36trieg2043ankbg9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trtapp",
+            "certificate_hash": "6b765f6852da29dccef7f6fbf4550525fd453883"
+          }
+        },
+        {
+          "client_id": "189332403887-bcoel4gtr7t95847h5k916t2q2npf5s9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzr3QZiRFEX-qHBxHiVElj5-EDTR1sgsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189332403887-bcoel4gtr7t95847h5k916t2q2npf5s9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
