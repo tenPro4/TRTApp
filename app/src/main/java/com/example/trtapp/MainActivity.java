@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.trtapp.Models.PreUser;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mDriver, mCustomer;
     private ProgressDialog loadingBar;
+    private TextView adminLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDriver = (Button) findViewById(R.id.driver);
         mCustomer = (Button) findViewById(R.id.customer);
+        adminLink = findViewById(R.id.adminLink);
         loadingBar = new ProgressDialog(this);
         Paper.init(this);
 
@@ -43,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CustomerLoginActivity.class);
+                startActivity(intent);
+                return;
+            }
+        });
+
+        adminLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AdminLoginActivity.class);
                 startActivity(intent);
                 return;
             }
@@ -83,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     return;
+            }
+        }else if (type.equals("Admin")) {
+            if (user != null) {
+                Intent intent = new Intent(MainActivity.this, RequestListActivity.class);
+                startActivity(intent);
+                finish();
+                return;
             }
         }
     }

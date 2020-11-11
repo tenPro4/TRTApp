@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    >
+
+    <TextView
+        android:id="@+id/cusName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:textSize="12dp"
+        />
+
+    <TextView
+        android:id="@+id/cusService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Request Service"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:id="@+id/cusLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Request Location"
+        android:layout_marginLeft="10dp"
+        />
+
+    <Button
+        android:id="@+id/assignDriverBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="->"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary"
+        />
+
+</LinearLayout>

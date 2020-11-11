@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="30sp">
+
+    <ImageView
+        android:id="@+id/driver_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/ic_default_user" />
+
+    <TextView
+        android:id="@+id/driverName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:layout_marginLeft="8dp"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/driverService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Service"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="12dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/driverId"
+        android:textSize="12dp"
+        android:background="@color/colorPrimary"
+        android:text="Assign"/>
+
+</LinearLayout>
