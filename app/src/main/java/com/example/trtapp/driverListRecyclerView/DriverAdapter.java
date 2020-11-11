@@ -17,6 +17,8 @@ import com.example.trtapp.HistorySingleActivity;
 import com.example.trtapp.Models.DriverObject;
 import com.example.trtapp.R;
 import com.example.trtapp.RequestListActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,24 +64,29 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverViewHolders>{
 
                 final DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers")
                         .child(driver.getDriverId()).child("customerRequest");
-                DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("requestList").child(driver.getRequestId());
+                final DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("requestList").child(driver.getRequestId());
                 final DatabaseReference cusRef = FirebaseDatabase.getInstance().getReference().child("customerRequest");
                 final HashMap map = new HashMap();
 
-                reqRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                reqRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
-                            String cusId = dataSnapshot.child("customerRideId").getValue().toString();
+                            final String cusId = dataSnapshot.child("customerRideId").getValue().toString();
                             map.put("customerRideId",cusId);
                             map.put("destination", dataSnapshot.child("destination").getValue().toString());
                             map.put("destinationLat",dataSnapshot.child("destinationLat").getValue().toString());
                             map.put("destinationLng", dataSnapshot.child("destinationLng").getValue().toString());
-                            driverRef.updateChildren(map);
-                            HashMap<String,Object> cusMap = new HashMap<>();
-                            cusMap.put("found",true);
-                            cusMap.put("driverId",driver.getDriverId());
-                            cusRef.child(cusId).updateChildren(cusMap);
+                            driverRef.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    reqRef.removeValue();
+                                    HashMap<String,Object> cusMap = new HashMap<>();
+                                    cusMap.put("found",true);
+                                    cusMap.put("driverId",driver.getDriverId());
+                                    cusRef.child(cusId).updateChildren(cusMap);
+                                }
+                            });
 
                             Intent intent = new Intent(context, RequestListActivity.class);
                             context.startActivity(intent);
@@ -93,7 +100,6 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverViewHolders>{
 
                     }
                 });
-                reqRef.removeValue();
             }
         });
     }

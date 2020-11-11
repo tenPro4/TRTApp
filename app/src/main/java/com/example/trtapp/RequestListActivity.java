@@ -1,14 +1,17 @@
 package com.example.trtapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.trtapp.Models.DriverObject;
 import com.example.trtapp.driverListRecyclerView.DriverAdapter;
 import com.example.trtapp.requestListRecyclerView.RequestObject;
 import com.example.trtapp.requestListRecyclerView.RequestsAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,15 @@ public class RequestListActivity extends AppCompatActivity {
         mRequestRecyclerView.setLayoutManager(mRequestLayoutManager);
         mRequestAdapter = new RequestsAdapter(getRequestListData(),RequestListActivity.this);
         mRequestRecyclerView.setAdapter(mRequestAdapter);
+
+        findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
+            }
+        });
 
         fetchRequestList();
     }
