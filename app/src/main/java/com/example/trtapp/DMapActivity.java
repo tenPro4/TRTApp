@@ -276,12 +276,6 @@ public class DMapActivity extends AppCompatActivity
             Intent intent = new Intent(DMapActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        }else if(id == R.id.nav_test){
-            Intent intent = new Intent(DMapActivity.this, DriverAvailableActivity.class);
-            startActivity(intent);
-        }else if(id == R.id.nav_test_rq){
-            Intent intent = new Intent(DMapActivity.this, RequestListActivity.class);
-            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -668,12 +662,12 @@ public class DMapActivity extends AppCompatActivity
         polylines.clear();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        DatabaseReference refAvailable = FirebaseDatabase.getInstance().getReference("driversAvailable");
-
-        refAvailable.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        DatabaseReference refAvailable = FirebaseDatabase.getInstance().getReference("driversAvailable");
+//
+//        refAvailable.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
+//    }
 }
 

@@ -26,9 +26,6 @@ import io.paperdb.Paper;
 public class AdminLoginActivity extends AppCompatActivity {
 
     private EditText mEmail, mPassword;
-    private Button mLogin;
-    private TextView login_link,register_link;
-    private String accessType="login";
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -56,37 +53,11 @@ public class AdminLoginActivity extends AppCompatActivity {
             }
         };
 
-        login_link = (TextView) findViewById(R.id.login_link);
-        register_link = (TextView) findViewById(R.id.register_link);
-
-        login_link.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                mLogin.setText("Login");
-                login_link.setVisibility(View.INVISIBLE);
-                register_link.setVisibility(View.VISIBLE);
-                accessType = mLogin.getText().toString().toLowerCase();
-            }
-        });
-
-        register_link.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                mLogin.setText("Register");
-                login_link.setVisibility(View.VISIBLE);
-                register_link.setVisibility(View.INVISIBLE);
-                accessType = mLogin.getText().toString().toLowerCase();
-            }
-        });
 
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
 
-        mLogin = (Button) findViewById(R.id.login);
-
-        mLogin.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String email = mEmail.getText().toString();
@@ -105,22 +76,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                     loadingBar.setMessage("Please wait, while we are checking the credentials.");
                     loadingBar.setCanceledOnTouchOutside(false);
                     loadingBar.show();
-                    if(accessType.toLowerCase().equals("login")){
-                        AllowAccessToAccount(email, password,"Admin");
-                    }else{
-                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(AdminLoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(!task.isSuccessful()){
-                                    Toast.makeText(AdminLoginActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    String user_id = mAuth.getCurrentUser().getUid();
-                                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Admin").child(user_id);
-                                    current_user_db.setValue(email);
-                                }
-                            }
-                        });
-                    }
+                    AllowAccessToAccount(email, password,"Admin");
                     loadingBar.dismiss();
                 }
             }

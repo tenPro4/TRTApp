@@ -691,7 +691,6 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         if (!TextUtils.isEmpty(address))
         {
             Geocoder geocoder = new Geocoder(this);
-
             try
             {
                 addressList = geocoder.getFromLocationName(address, 6);
